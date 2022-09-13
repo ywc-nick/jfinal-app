@@ -16,4 +16,9 @@ public class MainController extends Controller {
     public void bye(){
         renderHtml("<h2>再见!</h2>");
     }
+
+
+    public void index(){
+        renderText("index");
+    }
 }
