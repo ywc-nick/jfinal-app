@@ -7,7 +7,7 @@ import nxu.it.controller.MainController;
 public class MainConfig extends JFinalConfig {
     @Override
     public void configConstant(Constants constants) {
-
+        constants.setDevMode(true);
     }
 
     @Override
