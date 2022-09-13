@@ -1,13 +1,13 @@
-package nxu.it;
+package nxu.it.config;
 
 import com.jfinal.config.*;
 import com.jfinal.template.Engine;
-import nxu.it.controller.MainController;
+
 
 public class MainConfig extends JFinalConfig {
     @Override
     public void configConstant(Constants constants) {
-
+        constants.setDevMode(true);
     }
 
     @Override
