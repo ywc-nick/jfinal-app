@@ -128,4 +128,51 @@
             <version>${logback.version}</version>
         </dependency>
     </dependencies>
+
+
+    <repositories>
+
+        <repository>
+            <id>central</id>
+            <name>aliyun</name>
+            <url>https://repo.huaweicloud.com/repository/maven/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>mjl</id>
+            <name>mjl</name>
+            <url>https://mjlnxu.coding.net/p/maven/d/maven/git/raw/master/</url>
+        </repository>
+
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <url>https://repo.huaweicloud.com/repository/maven/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+
+        <pluginRepository>
+            <id>jboss-community</id>
+            <url>https://repo.huaweicloud.com/repository/maven/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+
+    </pluginRepositories>
 </project>
