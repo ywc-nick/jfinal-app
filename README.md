@@ -16,13 +16,14 @@
 1. 使用Undertow容器运行[默认激活]
 
 ```shell
-  mvn exec:java -Pundertow
+  mvn clean compile -Pundertow
+  mvn exec:java
 ```
 
 也可以运行Application类的主方法
 
 ```shell
-  mvn package -Pundertow
+  mvn clean package
 ```
 
 或在web-app模块下target目录下找到jfinal-app-release目录，执行myapp.cmd start
@@ -30,7 +31,7 @@
 2. 使用Tomcat等容器运行 需要先执行
 
 ```shell
-  mvn war:war -Ptomcat
+  mvn clean war:war -Ptomcat
 ```
 
 在target目录下会生成jfinal-app.war，将其放置到Tomcat的webapps目录即可
@@ -39,7 +40,7 @@
 3. 打包成uber/fat 独立jar包方式运行
 
 ```shell
-    mvn package -Puber-jar
+    mvn clean package -Puber
 ```
 在target目录下会生成jfinal-app-1.0.jar，可以执行以下命令运行
 

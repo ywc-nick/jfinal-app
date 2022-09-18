@@ -105,7 +105,7 @@
         </profile>
 
         <profile>
-            <id>uber-jar</id>
+            <id>uber</id>
             <dependencies>
                 <!-- https://mvnrepository.com/artifact/com.jfinal/jfinal-undertow -->
                 <dependency>
@@ -115,6 +115,14 @@
                 </dependency>
             </dependencies>
             <build>
+                <resources>
+                    <resource>
+                        <directory>${basedir}/src/main/resources</directory>
+                    </resource>
+                    <resource>
+                        <directory>${basedir}/src/main/webapp</directory>
+                    </resource>
+                </resources>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
@@ -142,18 +150,23 @@
                                                 implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                             <mainClass>${main.class}</mainClass>
                                         </transformer>
-                                        <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                        <transformer
+                                                implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
                                             <resource>reference.conf</resource>
                                         </transformer>
-                                        <transformer implementation="org.apache.maven.plugins.shade.resource.ApacheLicenseResourceTransformer"/>
-                                        <transformer implementation="org.apache.maven.plugins.shade.resource.DontIncludeResourceTransformer">
+                                        <transformer
+                                                implementation="org.apache.maven.plugins.shade.resource.ApacheLicenseResourceTransformer"/>
+                                        <transformer
+                                                implementation="org.apache.maven.plugins.shade.resource.DontIncludeResourceTransformer">
                                             <resource>NOTICE.txt</resource>
                                         </transformer>
-                                        <transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
+                                        <transformer
+                                                implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
                                             <resource>META-INF/LICENSE.txt</resource>
                                             <file>${basedir}/../../LICENSE.txt</file>
                                         </transformer>
-                                        <transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
+                                        <transformer
+                                                implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
                                             <resource>META-INF/NOTICE.txt</resource>
                                             <file>${basedir}/../../NOTICE.txt</file>
                                         </transformer>
@@ -186,7 +199,6 @@
             <version>${jfinal.version}</version>
         </dependency>
 
-
         <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-core -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -199,11 +211,25 @@
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
         </dependency>
-    </dependencies>
 
+        <!-- 依赖请放入这里 -->
+
+    </dependencies>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.10.1</version>
+                <configuration>
+                    <compilerArgument> -parameters</compilerArgument>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <repositories>
-
         <repository>
             <id>central</id>
             <name>aliyun</name>
@@ -220,7 +246,11 @@
             <name>mjl</name>
             <url>https://mjlnxu.coding.net/p/maven/d/maven/git/raw/master/</url>
         </repository>
-
+        <repository>
+            <id>maven_central</id>
+            <name>Maven Central</name>
+            <url>https://repo.maven.apache.org/maven2/</url>
+        </repository>
     </repositories>
 
     <pluginRepositories>
@@ -245,6 +275,6 @@
                 <enabled>false</enabled>
             </snapshots>
         </pluginRepository>
-
     </pluginRepositories>
+
 </project>
