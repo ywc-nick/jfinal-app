@@ -102,7 +102,79 @@
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
+        </profile>
 
+        <profile>
+            <id>uber-jar</id>
+            <dependencies>
+                <!-- https://mvnrepository.com/artifact/com.jfinal/jfinal-undertow -->
+                <dependency>
+                    <groupId>com.jfinal</groupId>
+                    <artifactId>jfinal-undertow</artifactId>
+                    <version>${jfinal-undertow.version}</version>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>3.0.0-M6</version>
+                    </plugin>
+                    <!-- Build uber jar -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-shade-plugin</artifactId>
+                        <version>3.2.4</version>
+                        <executions>
+                            <execution>
+                                <id>uber-jar</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>shade</goal>
+                                </goals>
+                                <configuration>
+                                    <createDependencyReducedPom>false</createDependencyReducedPom>
+                                    <transformers>
+                                        <transformer
+                                                implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                                        <transformer
+                                                implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                            <mainClass>${main.class}</mainClass>
+                                        </transformer>
+                                        <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                            <resource>reference.conf</resource>
+                                        </transformer>
+                                        <transformer implementation="org.apache.maven.plugins.shade.resource.ApacheLicenseResourceTransformer"/>
+                                        <transformer implementation="org.apache.maven.plugins.shade.resource.DontIncludeResourceTransformer">
+                                            <resource>NOTICE.txt</resource>
+                                        </transformer>
+                                        <transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
+                                            <resource>META-INF/LICENSE.txt</resource>
+                                            <file>${basedir}/../../LICENSE.txt</file>
+                                        </transformer>
+                                        <transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
+                                            <resource>META-INF/NOTICE.txt</resource>
+                                            <file>${basedir}/../../NOTICE.txt</file>
+                                        </transformer>
+                                    </transformers>
+                                    <filters>
+                                        <filter>
+                                            <artifact>*:*</artifact>
+                                            <excludes>
+                                                <exclude>META-INF/*.SF</exclude>
+                                                <exclude>META-INF/*.DSA</exclude>
+                                                <exclude>META-INF/*.RSA</exclude>
+                                                <exclude>META-INF/*.MF</exclude>
+                                            </excludes>
+                                        </filter>
+                                    </filters>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
     </profiles>
 

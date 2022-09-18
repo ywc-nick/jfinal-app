@@ -1,4 +1,4 @@
-# 专业综合设计II
+# 专业综合设计I
 
 #### 介绍
 
@@ -27,10 +27,22 @@
 
 或在web-app模块下target目录下找到jfinal-app-release目录，执行myapp.cmd start
 
-2. 使用Tomcat运行 需要先执行
+2. 使用Tomcat等容器运行 需要先执行
 
 ```shell
   mvn war:war -Ptomcat
 ```
 
-在web-app模块下target目录下会生成App.war，将其放置到Tomcat的webapps目录即可
+在target目录下会生成jfinal-app.war，将其放置到Tomcat的webapps目录即可
+注意：可以根据context path将war包文件名修改成特定名称 如ROOT.war
+
+3. 打包成uber/fat 独立jar包方式运行
+
+```shell
+    mvn package -Puber-jar
+```
+在target目录下会生成jfinal-app-1.0.jar，可以执行以下命令运行
+
+```shell
+   java -jar jfinal-app-1.0.jar
+```
