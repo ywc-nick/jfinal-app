@@ -246,7 +246,7 @@
     <pluginRepositories>
         <pluginRepository>
             <id>central</id>
-            <url>https://repo.huaweicloud.com/repository/maven/</url>
+            <url>https://mirrors.huaweicloud.com/repository/maven/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
@@ -257,7 +257,7 @@
 
         <pluginRepository>
             <id>jboss-community</id>
-            <url>https://repo.huaweicloud.com/repository/maven/</url>
+            <url>https://mirrors.huaweicloud.com/repository/maven/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
