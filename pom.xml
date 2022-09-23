@@ -240,17 +240,7 @@
                 <checksumPolicy>fail</checksumPolicy>
             </snapshots>
         </repository>
-
-        <repository>
-            <id>mjl</id>
-            <name>mjl</name>
-            <url>https://mjlnxu.coding.net/p/maven/d/maven/git/raw/master/</url>
-        </repository>
-        <repository>
-            <id>maven_central</id>
-            <name>Maven Central</name>
-            <url>https://repo.maven.apache.org/maven2/</url>
-        </repository>
+       
     </repositories>
 
     <pluginRepositories>
