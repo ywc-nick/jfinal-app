@@ -213,9 +213,37 @@
         </dependency>
 
         <!-- 依赖请放入这里 -->
+        <dependency>
+            <groupId>com.quhaodian</groupId>
+            <artifactId>freemaker</artifactId>
+            <version>1.8.1</version>
+        </dependency>
 
+
+
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
+            <version>3.5.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.0.0-M6</version>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-shade-plugin -->
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-shade-plugin</artifactId>
+            <version>3.2.4</version>
+        </dependency>
     </dependencies>
-    
+
+
     <build>
         <plugins>
             <plugin>

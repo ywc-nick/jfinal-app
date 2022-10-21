@@ -7,12 +7,14 @@ import com.jfinal.template.Engine;
 public class MainConfig extends JFinalConfig {
     @Override
     public void configConstant(Constants constants) {
+        //打开jfinal的开模式
         constants.setDevMode(true);
     }
 
     @Override
     public void configRoute(Routes routes) {
         routes.scan("nxu.it.controller");
+//        routes.setBaseViewPath("/WEB-INF/templates");
     }
 
     @Override
