@@ -1,16 +1,21 @@
 package nxu.it.controller;
 
+import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.core.Path;
 import com.jfinal.kit.Kv;
+import nxu.it.security.RequireAdmin;
+import nxu.it.security.RequireLogin;
 import nxu.it.config.Result;
+import nxu.it.entity.Student;
+import nxu.it.entity.SysUser;
+import nxu.it.validator.LoginFormValidator;
 
 import java.time.LocalDateTime;
 import java.time.format.TextStyle;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
+
+import static nxu.it.security.RequireLogin.*;
 
 
 @Path(value = "/", viewPath = "/")
@@ -20,7 +25,8 @@ public class MainController extends Controller {
     }
  public void  hello(){
         String username=get("username");
-        Integer age=getInt("age");
+        //获取值
+        Integer age=getInt("age",20);
         set("username",username);
         set("age",age);
         String[] names={"caoli","yangxiaoyan","666","zhuyan"};
@@ -87,5 +93,66 @@ public class MainController extends Controller {
          set("hobby",hobby);
          renderTemplate("register-result.html");
 //renderHtml("注册成功");
+    }
+
+    public  void student(){
+        List<Student> students=new ArrayList<>();
+        students.add(new Student(001,"曹理","男",20));
+        students.add(new Student(002,"杨晓燕","女",20));
+        students.add(new Student(003,"失败的慢","男",30));
+        students.add(new Student(004,"666","未知",0));
+        renderFreeMarker("student.ftl");
+    }
+
+    public void login(){
+        renderFreeMarker("login.ftl");
+    }
+
+    public  void logout(){
+        removeSessionAttr(USER_SESSION_KEY);
+        redirect("/login");
+    }
+@Before(LoginFormValidator.class)
+    public  void  loginCheck(){
+        String username=get("username");
+        String password=get("password");
+        if (username.equals("admin")&&password.equals("123456")||password.equals("nxu") ){
+            SysUser sysUser=new SysUser(username);
+            setSessionAttr(USER_SESSION_KEY,sysUser);
+            String redirectUrl = getSessionAttr(LOGIN_REDIRECT_URL_KEY) ;
+            if (redirectUrl!=null&&!redirectUrl.isBlank()){
+                redirect(redirectUrl);
+            }else   {
+            renderHtml("<h2 style=\"color:blue;\">登陆成功！</h2>");
+            }
+//            setCookie("username",username,30*60,true);
+        }else {
+            renderHtml("<h2 style=\"color:red;\">登录失败！</h2>");
+        }
+    }
+
+    public  boolean  checkUserLogin(){
+        String username = getSessionAttr("username");
+        if (username == null) {
+            redirect("/login");
+            return  false;
+        }
+        return true;
+    }
+
+@Before(RequireLogin.class)
+    public  void  main() {
+    SysUser  sysUser = getSessionAttr(USER_SESSION_KEY);
+    set("sysUser",sysUser);
+    renderFreeMarker("main.ftl");
+    }
+
+@Before(RequireLogin.class)
+        public  void  test(){
+            renderHtml("<h2>这是个测试页面</h2>");
+    }
+    @Before({RequireLogin.class, RequireAdmin.class})
+    public  void  admin(){
+        renderHtml("管理员页面");
     }
 }
